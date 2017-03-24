@@ -12,12 +12,15 @@ export default context => {
 
   return new Promise((resolve, reject) => {
     // set router's location
+    // 执行路由
     router.push(context.url)
 
     // wait until router has resolved possible async hooks
+    // 服务器路由处理
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents()
       // no matched routes
+      // 404处理
       if (!matchedComponents.length) {
         reject({ code: 404 })
       }
@@ -25,6 +28,7 @@ export default context => {
       // A preFetch hook dispatches a store action and returns a Promise,
       // which is resolved when the action is complete and store state has been
       // updated.
+      // 执行匹配组件的preFetch方法预处理数据
       Promise.all(matchedComponents.map(component => {
         return component.preFetch && component.preFetch(store)
       })).then(() => {
@@ -35,7 +39,9 @@ export default context => {
         // inline the state in the HTML response. This allows the client-side
         // store to pick-up the server-side state without having to duplicate
         // the initial data fetching on the client.
+        // 状态传给客户端，不需要重新处理
         context.state = store.state
+        // 渲染（返回）app
         resolve(app)
       }).catch(reject)
     })

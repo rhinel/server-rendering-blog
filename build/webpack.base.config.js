@@ -1,5 +1,6 @@
 const path = require('path')
 const vueConfig = require('./vue-loader.config')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   devtool: '#source-map',
@@ -42,6 +43,17 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader',
         options: {
@@ -51,6 +63,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new ExtractTextPlugin("[name].[contenthash].css")
+  ],
   performance: {
     hints: process.env.NODE_ENV === 'production' ? 'warning' : false
   }
