@@ -23,6 +23,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "firebase": "^3.7.2",
     "github-markdown-css": "^2.4.1",
+    "highlight.js": "^9.10.0",
     "lru-cache": "^4.0.2",
     "marked": "^0.3.6",
     "serve-favicon": "^2.4.1",
