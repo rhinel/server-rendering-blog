@@ -26,6 +26,7 @@
     "highlight.js": "^9.10.0",
     "lru-cache": "^4.0.2",
     "marked": "^0.3.6",
+    "node-uuid": "^1.4.8",
     "serve-favicon": "^2.4.1",
     "simplemde": "^1.11.2",
     "style-loader": "^0.16.0",
@@ -35,7 +36,8 @@
     "vue-style-loader": "^2.0.4",
     "vuex": "^2.2.1",
     "vuex-router-sync": "^4.1.2",
-    "webpack-merge": "^4.0.0"
+    "webpack-merge": "^4.0.0",
+    "ws": "^2.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",

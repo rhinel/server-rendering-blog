@@ -3,7 +3,7 @@
     <header class="header">
       <nav class="inner">
         <router-link to="/" exact>
-          <!-- <img class="logo" src="~public/logo-48.png" alt="logo"> -->
+          <img class="logo" src="./assets/ka-red-background.jpg" alt="logo">
         </router-link>
         <router-link to="/top">list</router-link>
         <div class="add">
@@ -70,7 +70,7 @@ a
       margin-right 0
 
 .logo
-  width 24px
+  height 24px
   margin-right 10px
   display inline-block
   vertical-align middle
