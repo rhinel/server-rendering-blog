@@ -46,6 +46,7 @@ export default {
       // otherwise this is a page switch, start with blank and wait for data load.
       // we need these local state so that we can precisely control the timing
       // of the transitions.
+      // 处理服务端渲染
       displayedPage: isInitialRender ? Number(this.$store.state.route.params.page) || 1 : -1,
       displayedItems: isInitialRender ? this.$store.getters.activeItems : []
     }
@@ -66,11 +67,13 @@ export default {
     }
   },
 
+  // 客户端挂载开始前调用
   beforeMount () {
     if (this.$root._isMounted) {
       this.loadItems(this.page)
     }
     // watch the current list for realtime updates
+    // 数据监听，websocket
     this.unwatchList = watchList(this.type, ids => {
       this.$store.commit('SET_LIST', { type: this.type, ids })
       this.$store.dispatch('ENSURE_ACTIVE_ITEMS').then(() => {
@@ -80,6 +83,7 @@ export default {
   },
 
   beforeDestroy () {
+    // 取消监听
     this.unwatchList()
   },
 
@@ -92,13 +96,16 @@ export default {
   methods: {
     loadItems (to = this.page, from = -1) {
       this.loading = true
+      // 刷新数据
       this.$store.dispatch('FETCH_LIST_DATA', {
         type: this.type
       }).then(() => {
+        // 回到第一页
         if (this.page < 0 || this.page > this.maxPage) {
           this.$router.replace(`/${this.type}/1`)
           return
         }
+        // 处理动画
         this.transition = from === -1
           ? null
           : to > from ? 'slide-left' : 'slide-right'

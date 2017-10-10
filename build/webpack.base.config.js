@@ -1,8 +1,14 @@
 const path = require('path')
 const vueConfig = require('./vue-loader.config')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+
+const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: isProd
+    ? false
+    : '#cheap-module-eval-source-map',
   entry: {
     app: './src/entry-client.js',
     vendor: [
@@ -42,6 +48,17 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader',
         options: {
@@ -52,6 +69,13 @@ module.exports = {
     ]
   },
   performance: {
-    hints: process.env.NODE_ENV === 'production' ? 'warning' : false
-  }
+    maxEntrypointSize: 300000,
+    hints: isProd ? 'warning' : false
+  },
+  plugins: isProd ? [
+    new ExtractTextPlugin("[name].[contenthash].css")
+  ] : [
+    new ExtractTextPlugin("[name].[contenthash].css"),
+    new FriendlyErrorsPlugin()
+  ]
 }

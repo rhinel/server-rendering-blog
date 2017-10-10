@@ -3,16 +3,12 @@
     <header class="header">
       <nav class="inner">
         <router-link to="/" exact>
-          <!-- <img class="logo" src="~public/logo-48.png" alt="logo"> -->
+          <img class="logo" src="./assets/ka-red-background.jpg" alt="logo">
         </router-link>
-        <router-link to="/top">Top</router-link>
-        <router-link to="/new">New</router-link>
-        <router-link to="/show">Show</router-link>
-        <router-link to="/ask">Ask</router-link>
-        <router-link to="/job">Jobs</router-link>
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
-          Built with Vue.js
-        </a>
+        <router-link to="/top">list</router-link>
+        <div class="add">
+          <router-link to="/create"><i class="el-icon-edit"></i></router-link>
+        </div>
       </nav>
     </header>
     <transition name="fade" mode="out-in">
@@ -36,7 +32,7 @@ a
   text-decoration none
 
 .header
-  background-color #ff6600
+  background-color #1D8CE0
   position fixed
   z-index 999
   height 55px
@@ -64,14 +60,17 @@ a
       font-weight 400
     &:nth-child(6)
       margin-right 0
-  .github
+  .add
+    cursor pointer
     color #fff
     font-size .9em
     margin 0
     float right
+    a
+      margin-right 0
 
 .logo
-  width 24px
+  height 24px
   margin-right 10px
   display inline-block
   vertical-align middle

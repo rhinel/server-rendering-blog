@@ -19,9 +19,12 @@ const createListView = name => () =>
   System.import('../views/CreateListView').then(m => m.createListView(name))
 const ItemView = () => System.import('../views/ItemView.vue')
 const UserView = () => System.import('../views/UserView.vue')
+const CreateView = require('../views/CreateView.vue')
 
 export default new Router({
+  // H5模式
   mode: 'history',
+  // 路由进入处理浏览器滚动位置
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/top/:page(\\d+)?', component: createListView('top') },
@@ -31,6 +34,7 @@ export default new Router({
     { path: '/job/:page(\\d+)?', component: createListView('job') },
     { path: '/item/:id(\\d+)', component: ItemView },
     { path: '/user/:id', component: UserView },
+    { path: '/create', component: CreateView },
     { path: '/', redirect: '/top' }
   ]
 })
