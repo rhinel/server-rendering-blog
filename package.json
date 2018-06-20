@@ -1,7 +1,7 @@
 {
   "name": "server-rendering-blog",
   "description": "A Vue.js project",
-  "author": "rhinelkc <rhinelkc@hotmail.com>",
+  "author": "rhinel <rhinelkc@hotmail.com>",
   "private": true,
   "scripts": {
     "dev": "node server",
